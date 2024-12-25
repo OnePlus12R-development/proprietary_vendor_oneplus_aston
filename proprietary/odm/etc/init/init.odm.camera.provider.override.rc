@@ -7,6 +7,7 @@ service vendor.camera-provider /vendor/bin/hw/vendor.qti.camera.provider-service
     interface vendor.qti.hardware.camera.aon@1.3::IAONService aoncameraservice
     interface vendor.qti.hardware.camera.postproc@1.0::IPostProcService camerapostprocservice
     interface aidl vendor.oplus.hardware.cameraextension.ICameraExtensionService/default
+    interface aidl vendor.oplus.hardware.camera_rfi.ICameraRfiService/default
     class hal
     user cameraserver
     group audio camera input drmrpc oem_2907 oem_2912

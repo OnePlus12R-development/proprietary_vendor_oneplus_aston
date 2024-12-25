@@ -194,6 +194,8 @@
             144,
             240,
             160,
+            240,
+            562,
             256,
             154,
             246,
@@ -239,6 +241,13 @@
         ]
     },
     "com.android.cts.verifier":{
+        "forceZoomRange": true,
+        "camIdZoomRanges": [
+            "0","0.9","1.6",
+            "1","0.9","1.6",
+            "2","0.9","1.6",
+            "3","0.9","1.6"
+        ],
         "adjust_exposure_time_parameter":true,
         "MinExposureTime":100000 ,
         "MaxExposureTime":244840905

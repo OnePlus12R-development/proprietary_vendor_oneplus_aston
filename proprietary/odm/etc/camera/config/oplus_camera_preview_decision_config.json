@@ -907,6 +907,10 @@
                 "APS_CAPMODE_FRONT_NORMAL"
               ],
               "eq1":[
+                "paramsHolder->livephoto_enable",
+                false
+              ],
+              "eq2":[
                 "isTurboHdrEnable",
                 true
               ],
@@ -920,11 +924,11 @@
                   true
                 ]
               },
-              "eq2":[
+              "eq3":[
                 "bracketMode",
                 "APS_BRACKET_NONE"
               ],
-              "eq3":[
+              "eq4":[
                 "isHdrDetected",
                 false
               ],
@@ -1496,6 +1500,44 @@
                   ]
                 },
                 "planResult":{
+                  "bracketMode":"APS_BRACKET_TR_ZSL_PSL_STATIC"
+                }
+              }
+            ]
+          },
+          {
+            "defaultResult":{
+              "turboRawScene":"APS_TURBORAW_MODE_NIGHT"
+            },
+            "plan":[
+              {
+                "planCondition":{
+                  "eq":[
+                    "paramsHolder->night_se_enable->1",
+                    0
+                  ]
+                },
+                "planResult":{
+                  "turboRawScene":"APS_TURBORAW_MODE_DAYTIME",
+                  "bracketMode":"APS_BRACKET_TR_ZSL_PSL_STATIC"
+                }
+              }
+            ]
+          },
+          {
+            "defaultResult":{
+              "turboRawScene":"APS_TURBORAW_MODE_NIGHT"
+            },
+            "plan":[
+              {
+                "planCondition":{
+                  "eq":[
+                    "paramsHolder->night_se_enable->1",
+                    0
+                  ]
+                },
+                "planResult":{
+                  "turboRawScene":"APS_TURBORAW_MODE_DAYTIME",
                   "bracketMode":"APS_BRACKET_TR_ZSL_PSL_STATIC"
                 }
               }
@@ -2499,11 +2541,7 @@
                 "APS_ALGO_COUPLE_HDR"
               ]
             },
-            "plan":[
-              {
-                "planCondition":{}
-              }
-            ]
+            "plan":null
           }
         ],
         "nextMode":"ALGO_EXTENSION_MFNR",
@@ -2523,11 +2561,7 @@
                 "APS_ALGO_NONE"
               ]
             },
-            "plan":[
-              {
-                "planCondition":{}
-              }
-            ]
+            "plan":null
           }
         ],
         "childMode":"ALGO_PARAM_EXTENSION_MFNR"
@@ -3008,6 +3042,64 @@
                       "fwkLuxIdx",
                       200
                     ],
+                    "eq":[
+                      "paramsHolder->livephoto_enable",
+                      true
+                    ],
+                    "or":{
+                      "and2":{
+                        "not_eq":[
+                          "exposureCompenstation",
+                          0
+                        ],
+                        "eq":[
+                          "gloableEvEnable",
+                          false
+                        ]
+                      },
+                      "and":{
+                        "not_eq":[
+                          "exposureCompenstation",
+                          0
+                        ],
+                        "eq":[
+                          "turboRawNightLimiter",
+                          false
+                        ]
+                      },
+                      "gt":[
+                        "gloableEvVal",
+                        9
+                      ],
+                      "lt":[
+                        "gloableEvVal",
+                        -9
+                      ]
+                    }
+                  }
+                },
+                "planResult":{
+                  "captureEVList":[
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "isHdrFusion":0,
+                  "isShowHDRIcon":0,
+                  "metaIndex":4,
+                  "multiFrameCnt":5,
+                  "preCollectFrameCnt":4
+                }
+              },
+              {
+                "planCondition":{
+                  "and":{
+                    "egt":[
+                      "fwkLuxIdx",
+                      200
+                    ],
                     "or":{
                       "and2":{
                         "not_eq":[
@@ -3119,6 +3211,45 @@
                       200
                     ],
                     "eq":[
+                      "paramsHolder->livephoto_enable",
+                      true
+                    ],
+                    "eq1":[
+                      "oplusMeta->com.qti.stats_control.hdr_detected",
+                      1
+                    ],
+                    "gt":[
+                      "gloableEvVal",
+                      5
+                    ],
+                    "elt":[
+                      "gloableEvVal",
+                      9
+                    ]
+                  }
+                },
+                "planResult":{
+                  "captureEVList":[
+                    0,
+                    0,
+                    0,
+                    0,
+                    "{oplusMeta->com.qti.stats_control.hdr_EV_Minus:[-12, 36]}",
+                    0
+                  ],
+                  "metaIndex":5,
+                  "multiFrameCnt":6,
+                  "preCollectFrameCnt":4
+                }
+              },
+              {
+                "planCondition":{
+                  "and":{
+                    "egt":[
+                      "fwkLuxIdx",
+                      200
+                    ],
+                    "eq":[
                       "oplusMeta->com.qti.stats_control.hdr_detected",
                       1
                     ],
@@ -3180,6 +3311,51 @@
                   ],
                   "multiFrameCnt":6,
                   "metaIndex":5,
+                  "preCollectFrameCnt":4
+                }
+              },
+              {
+                "planCondition":{
+                  "and":{
+                    "egt":[
+                      "fwkLuxIdx",
+                      200
+                    ],
+                    "eq":[
+                      "paramsHolder->livephoto_enable",
+                      true
+                    ],
+                    "eq1":[
+                      "cameraId",
+                      0
+                    ],
+                    "eq2":[
+                      "oplusMeta->com.qti.stats_control.hdr_detected",
+                      1
+                    ],
+                    "or":{
+                      "eq":[
+                        "bracketMode",
+                        "APS_BRACKET_TR_ZSL_PSL_GLOBAL_MOTION"
+                      ],
+                      "eq1":[
+                        "bracketMode",
+                        "APS_BRACKET_TR_ZSL_PSL_LOCAL_MOTION"
+                      ]
+                    }
+                  }
+                },
+                "planResult":{
+                  "captureEVList":[
+                    0,
+                    0,
+                    0,
+                    0,
+                    "{oplusMeta->com.qti.stats_control.hdr_EV_Minus:[-21, 36]}",
+                    0
+                  ],
+                  "metaIndex":5,
+                  "multiFrameCnt":6,
                   "preCollectFrameCnt":4
                 }
               },
@@ -3263,6 +3439,85 @@
                     0
                   ],
                   "metaIndex":5,
+                  "multiFrameCnt":6,
+                  "preCollectFrameCnt":4
+                }
+              },
+              {
+                "planCondition":{
+                  "and":{
+                    "egt":[
+                      "fwkLuxIdx",
+                      200
+                    ],
+                    "eq":[
+                      "paramsHolder->livephoto_enable",
+                      true
+                    ],
+                    "or2":{
+                      "and2":{
+                        "or":{
+                          "eq":[
+                            "cameraId",
+                            0
+                          ],
+                          "eq1":[
+                            "isSupportedFrontHDR",
+                            1
+                          ]
+                        },
+                        "eq":[
+                          "oplusMeta->com.qti.stats_control.hdr_detected",
+                          1
+                        ],
+                        "lt":[
+                          "oplusMeta->com.qti.stats_control.hdr_EV_Minus",
+                          -21.0
+                        ]
+                      },
+                      "and":{
+                        "eq":[
+                          "cameraId",
+                          1
+                        ],
+                        "eq1":[
+                          "hdrSceneState",
+                          0
+                        ],
+                        "lt":[
+                          "oplusMeta->com.qti.stats_control.hdr_EV_Minus",
+                          -21.0
+                        ]
+                      }
+                    },
+                    "or":{
+                      "eq":[
+                        "oplusMeta->com.oplus.auto.hdr.enable",
+                        "HDR_MODE_AUTO"
+                      ],
+                      "and":{
+                        "not_eq":[
+                          "captureMode",
+                          "APS_CAPMODE_REAR_NORMAL"
+                        ],
+                        "not_eq1":[
+                          "captureMode",
+                          "APS_CAPMODE_FRONT_NORMAL"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "planResult":{
+                  "captureEVList":[
+                    0,
+                    0,
+                    0,
+                    0,
+                    "{oplusMeta->com.qti.stats_control.hdr_EV_Minus:[-36, 36]}",
+                    "{oplusMeta->com.qti.stats_control.hdr_EV_Minus:[-36, 36]} / 2"
+                  ],
+                  "metaIndex":6,
                   "multiFrameCnt":6,
                   "preCollectFrameCnt":4
                 }
@@ -3352,6 +3607,85 @@
                       "fwkLuxIdx",
                       200
                     ],
+                    "eq":[
+                      "paramsHolder->livephoto_enable",
+                      true
+                    ],
+                    "or2":{
+                      "and2":{
+                        "or":{
+                          "eq":[
+                            "cameraId",
+                            0
+                          ],
+                          "eq1":[
+                            "isSupportedFrontHDR",
+                            1
+                          ]
+                        },
+                        "eq":[
+                          "oplusMeta->com.qti.stats_control.hdr_detected",
+                          1
+                        ],
+                        "gt":[
+                          "oplusMeta->com.qti.stats_control.hdr_EV_Minus",
+                          -21.0001
+                        ]
+                      },
+                      "and":{
+                        "eq":[
+                          "cameraId",
+                          1
+                        ],
+                        "eq1":[
+                          "hdrSceneState",
+                          0
+                        ],
+                        "gt":[
+                          "oplusMeta->com.qti.stats_control.hdr_EV_Minus",
+                          -21.0001
+                        ]
+                      }
+                    },
+                    "or":{
+                      "eq":[
+                        "oplusMeta->com.oplus.auto.hdr.enable",
+                        "HDR_MODE_AUTO"
+                      ],
+                      "and":{
+                        "not_eq":[
+                          "captureMode",
+                          "APS_CAPMODE_REAR_NORMAL"
+                        ],
+                        "not_eq1":[
+                          "captureMode",
+                          "APS_CAPMODE_FRONT_NORMAL"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "planResult":{
+                  "captureEVList":[
+                    0,
+                    0,
+                    0,
+                    0,
+                    "{oplusMeta->com.qti.stats_control.hdr_EV_Minus:[-36, 36]}",
+                    0
+                  ],
+                  "metaIndex":5,
+                  "multiFrameCnt":6,
+                  "preCollectFrameCnt":4
+                }
+              },
+              {
+                "planCondition":{
+                  "and":{
+                    "egt":[
+                      "fwkLuxIdx",
+                      200
+                    ],
                     "or2":{
                       "and2":{
                         "or":{
@@ -3424,6 +3758,33 @@
               },
               {
                 "planCondition":{
+                  "and":{
+                    "egt":[
+                      "fwkLuxIdx",
+                      200
+                    ],
+                    "eq":[
+                      "paramsHolder->livephoto_enable",
+                      true
+                    ]
+                  }
+                },
+                "planResult":{
+                  "captureEVList":[
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "metaIndex":4,
+                  "multiFrameCnt":5,
+                  "preCollectFrameCnt":4,
+                  "thumbnailIndex":1
+                }
+              },
+              {
+                "planCondition":{
                   "egt":[
                     "fwkLuxIdx",
                     200
@@ -3443,6 +3804,85 @@
                   "metaIndex":6,
                   "thumbnailIndex":1,
                   "preCollectFrameCnt":6
+                }
+              },
+              {
+                "planCondition":{
+                  "and":{
+                    "lt":[
+                      "fwkLuxIdx",
+                      200
+                    ],
+                    "eq":[
+                      "paramsHolder->livephoto_enable",
+                      true
+                    ],
+                    "or2":{
+                      "and2":{
+                        "or":{
+                          "eq":[
+                            "cameraId",
+                            0
+                          ],
+                          "eq1":[
+                            "isSupportedFrontHDR",
+                            1
+                          ]
+                        },
+                        "eq":[
+                          "oplusMeta->com.qti.stats_control.hdr_detected",
+                          1
+                        ],
+                        "lt":[
+                          "oplusMeta->com.qti.stats_control.hdr_EV_Minus",
+                          -21.0
+                        ]
+                      },
+                      "and":{
+                        "eq":[
+                          "cameraId",
+                          1
+                        ],
+                        "eq1":[
+                          "hdrSceneState",
+                          0
+                        ],
+                        "lt":[
+                          "oplusMeta->com.qti.stats_control.hdr_EV_Minus",
+                          -21.0
+                        ]
+                      }
+                    },
+                    "or":{
+                      "eq":[
+                        "oplusMeta->com.oplus.auto.hdr.enable",
+                        "HDR_MODE_AUTO"
+                      ],
+                      "and":{
+                        "not_eq":[
+                          "captureMode",
+                          "APS_CAPMODE_REAR_NORMAL"
+                        ],
+                        "not_eq1":[
+                          "captureMode",
+                          "APS_CAPMODE_FRONT_NORMAL"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "planResult":{
+                  "captureEVList":[
+                    0,
+                    0,
+                    0,
+                    0,
+                    "{oplusMeta->com.qti.stats_control.hdr_EV_Minus:[-36, 36]}",
+                    "{oplusMeta->com.qti.stats_control.hdr_EV_Minus:[-36, 36]} / 2"
+                  ],
+                  "metaIndex":6,
+                  "multiFrameCnt":6,
+                  "preCollectFrameCnt":4
                 }
               },
               {
@@ -3882,10 +4322,16 @@
             "plan":[
               {
                 "planCondition":{
-                  "not_eq":[
-                    "exposureCompenstation",
-                    0
-                  ]
+                  "or":{
+                    "not_eq":[
+                      "exposureCompenstation",
+                      0
+                    ],
+                    "eq":[
+                      "paramsHolder->night_se_enable->1",
+                      0
+                    ]
+                  }
                 },
                 "planResult":{
                   "captureEVList":[
@@ -3971,14 +4417,22 @@
             ]
           },
           {
-            "defaultResult":{},
+            "defaultResult":{
+              "nightSeTrigger":0
+            },
             "plan":[
               {
                 "planCondition":{
-                  "eq":[
-                    "captureMode",
-                    "APS_CAPMODE_REAR_NORMAL"
-                  ]
+                  "or":{
+                    "eq":[
+                      "captureMode",
+                      "APS_CAPMODE_REAR_NORMAL"
+                    ],
+                    "eq1":[
+                      "captureMode",
+                      "APS_CAPMODE_FRONT_NORMAL"
+                    ]
+                  }
                 },
                 "planResult":{
                   "nightSeTrigger":1
@@ -5426,11 +5880,7 @@
                 8
               ]
             },
-            "plan":[
-              {
-                "planCondition":{}
-              }
-            ]
+            "plan":null
           }
         ]
       }
