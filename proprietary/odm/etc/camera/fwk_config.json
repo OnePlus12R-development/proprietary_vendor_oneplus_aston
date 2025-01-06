@@ -221,7 +221,6 @@
         ],
         "skipSizeListForCtsVerifier": [
             1600, 800,
-            1280, 720,
             800,  400,
             804,  360,
             640,  360,
@@ -279,6 +278,15 @@
         "app_disable_fb_evict": true,
         "app_disable_fb_activity": [
             "com.tencent.mm.plugin.recordvideo.activity.MMRecordUI"
+        ],
+        "app_disable_fb_thirdparty_activity": [
+            "com.tencent.mm.plugin.appbrand.ui.AppBrandUI00",
+            "com.tencent.mm.plugin.appbrand.ui.AppBrandUI01",
+            "com.tencent.mm.plugin.appbrand.ui.AppBrandUI02",
+            "com.tencent.mm.plugin.appbrand.ui.AppBrandUI03",
+            "com.tencent.mm.plugin.appbrand.ui.AppBrandUI04",
+            "com.tencent.mm.plugin.flash.FaceFlashUI",
+            "com.tencent.mm.plugin.flash.action.FaceFlashActionUI"
         ],
         "resolutionFilterForNotAddSizeAPI1": [
             "1608x720",
@@ -451,7 +459,24 @@
         "maxPreviewHeightForAPI2cameraId0": 1080
     },
     "com.whatsapp": {
-        "app_enable_rio": true
+        "app_enable_rio": true,
+        "app_disable_fb_activity": [
+            "com.whatsapp.camera.CameraActivity",
+            "com.whatsapp.qrcode.contactqr.ContactQrActivity",
+            "com.whatsapp.statuscomposer.ConsolidatedStatusComposerActivity"
+        ],
+        "app_enable_fb_activity": [
+            ""
+        ]
+    },
+    "com.microsoft.teams": {
+        "app_enable_fb_activity": [
+            "com.microsoft.skype.teams.views.activities.PreJoinActivity",
+            "com.microsoft.skype.teams.views.activities.InCallActivity"
+        ],
+        "app_disable_fb_activity": [
+            "com.microsoft.office.lens.lenscommon.ui.LensActivity"
+        ]
     },
     "com.wuba": {
          "previewSizeForAPI1Width": 1920,

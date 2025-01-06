@@ -7591,6 +7591,7 @@ cc_prebuilt_library_shared {
                 "libnativewindow",
                 "libhidlbase",
                 "libAlgoProcess",
+                "libapsjpeg",
                 "libc++",
                 "libc",
                 "libm",

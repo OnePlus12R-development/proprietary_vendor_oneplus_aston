@@ -1523,25 +1523,6 @@
                 }
               }
             ]
-          },
-          {
-            "defaultResult":{
-              "turboRawScene":"APS_TURBORAW_MODE_NIGHT"
-            },
-            "plan":[
-              {
-                "planCondition":{
-                  "eq":[
-                    "paramsHolder->night_se_enable->1",
-                    0
-                  ]
-                },
-                "planResult":{
-                  "turboRawScene":"APS_TURBORAW_MODE_DAYTIME",
-                  "bracketMode":"APS_BRACKET_TR_ZSL_PSL_STATIC"
-                }
-              }
-            ]
           }
         ],
         "childMode":"ALGO_PARAM_TURBO_HDR_NIGHT"
